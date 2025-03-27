@@ -153,8 +153,6 @@ Since version 4, Tailwind underwent a significant overhaul and adding custom uti
 }
 ```
 
-Note that this is only possible starting from v4.0.18 since the "--spacing()" special function was added [here](https://github.com/tailwindlabs/tailwindcss/pull/17308).
-
 ## Credits
 
 This plugin was inspired by [@LoganDark](https://github.com/LoganDark) and [@codytooker](https://github.com/codytooker) discussion here: https://github.com/tailwindcss/tailwindcss/issues/540
