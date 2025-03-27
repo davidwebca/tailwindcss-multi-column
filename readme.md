@@ -1,6 +1,6 @@
 # Tailwind CSS Multi-Column Plugin
 
-This plugin adds utilities to use all multi-column properties with Tailwind CSS.
+This plugin adds utilities to use all multi-column properties with Tailwind CSS up to version 3. For v4 and up, [see below](#tailwind-4).
 
 ## Installation
 
@@ -104,6 +104,56 @@ This means you won't be able to use `@apply` with those classes. Let me know if 
 .col-span-none { column-span: none; }
 .col-span-all { column-span: all; }
 ```
+
+## Tailwind 4
+
+Since version 4, Tailwind underwent a significant overhaul and adding custom utilities is much easier than before thanks to it's css-first configuration system and automatic value detection. Here's what this plugin could be replaced with: 
+
+```css
+@import "tailwindcss";
+
+:root{
+  --tw-column-rule-style: solid;
+}
+
+@theme {
+  --column-rule-style-solid: solid;
+  --column-rule-style-dashed: dashed;
+  --column-rule-style-dotted: dotted;
+  --column-rule-style-double: double;
+  --column-rule-style-none: none;
+  --column-fill-auto: auto;
+  --column-fill-balance: balance;
+  --column-fill-all: all;
+  --column-count-span-none: none;
+  --column-count-span-all: all;
+}
+@utility col-count-*{
+  column-count: --value(integer);
+}
+@utility col-gap-*{
+  column-gap: --spacing(--value(integer));
+}
+@utility col-w-*{
+  column-width: --spacing(--value(integer));
+}
+@utility col-rule-*{
+  column-rule-style: var(--tw-column-rule-style);
+  column-rule-color: --value(--color);
+  column-rule-width: calc(--value(integer) * 1px);
+  column-rule-style: --value(--column-rule-style-*);
+}
+@utility col-fill-*{
+  column-fill: --value(--column-fill-*);
+}
+
+/* Specific name with "col-count" prefix to avoid collision with grid-column utilities */
+@utility col-span-*{
+  column-span: --value(--column-count-span-*);
+}
+```
+
+Note that this is only possible starting from v4.0.18 since the "--spacing()" special function was added [here](https://github.com/tailwindlabs/tailwindcss/pull/17308).
 
 ## Credits
 
